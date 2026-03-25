@@ -1,6 +1,7 @@
 import Core.database as get_db
 from fastapi import FastAPI
 from Routes.route import router
+import os
 
 app = FastAPI(
     title="API de prueba",
@@ -12,16 +13,9 @@ app.include_router(router)
 
 def main():
     import uvicorn
-    import webbrowser
-    from threading import Timer
     
-    host = "127.0.0.1"
-    port = 8000
-    
-    def abrir_browser():
-        webbrowser.open(f"http://{host}:{port}/ping")
-        
-    Timer(1.5, abrir_browser).start()
+    host = "0.0.0.0"
+    port = int(os.environ.get("PORT", 8000))
     
     uvicorn.run(app, host=host, port=port, log_level="info")
     
