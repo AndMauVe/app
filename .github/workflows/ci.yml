@@ -24,8 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: python requirements.py
-        working-directory: "Modulo 11/Clase 3/app"
+
 
       - name: Run tests
         run: python -m pytest -v
-        working-directory: "Modulo 11/Clase 3/app"
+
