@@ -11,6 +11,15 @@ app = FastAPI(
 
 app.include_router(router)
 
+
+@app.on_event("startup")
+def _startup_init_db():
+    # Evita romper el arranque si no hay BD disponible (ej. CI sin Postgres).
+    try:
+        get_db.init_db()
+    except Exception as e:
+        print(f"[WARN] No se pudo inicializar la BD: {e}")
+
 def main():
     import uvicorn
     

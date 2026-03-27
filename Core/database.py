@@ -30,6 +30,11 @@ try:
 except SQLAlchemyError as e:
     raise Exception("Error de conexión a la base de datos: {e}")
 
+def init_db() -> None:
+    # Importa los modelos para que SQLAlchemy registre las tablas en Base.metadata
+    from Models.user import User  # noqa: F401
+    Base.metadata.create_all(bind=engine)
+
 def get_db():
     db = SessionLocal()
     try:
